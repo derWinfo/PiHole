@@ -18,10 +18,14 @@
 
 # -- Malware/Spam --
 
-# TLDs von China, Russland, Sowjetunion, Vietnam und .top (Malware/Spam)
+# Most abused TLDs according to https://www.spamhaus.org/statistics/tlds/  (Stand April 2021)
+(\.asia$)|(\.surf$)|(\.date$)|(\.gq$)|(\.top$)|(\.work$)|(\.ml$)|(\.bar$)|(\.cf$)|(\.tk$)
+
+# SemperVideo Liste zu Malware/Spam
+# TLDs von China, Russland, Sowjetunion, Vietnam und .top
 (\.cn$|\.ru$|\.su$|\.vn$|\.top$)
 
-# TLD .link: (Linkverkürzer)
+# TLD .link (Linkverkürzer)
 \.link$
 
 # -- Jugendschutz --
@@ -37,7 +41,7 @@
 # ----------------------
 
 # Sperrt alle URLs zu "sendgrid.net" (Spam)
-sendgrid\.net$
+(^|\.)sendgrid\.net$
 
 # Sperrt alle Punycode-Domains
 .*(xn--).*
@@ -45,10 +49,17 @@ sendgrid\.net$
 # Sperrt alle URLS zu "duckdns.org"
 duckdns\.org$
 
+# YouTube Werbung
+# das eigentliche Video stoppt beim Versuch die Werbung zu laden und läuft nicht weiter
+# bisher keine Lösung bekannt
+r[0-9]+---sn-.*\.googlevideo\.com$
+
 # --------------
 # -- Begriffe --
 # --------------
 
 # Sperrt alle Domains, die die genannten Begriffe beinhalten (z.B. Facebook)
+# hier URLs geblockt, die den Begriff erst nach der Domain verwenden (z.B. spiegel.de/Facebook-Nutzerzehlen-2021), 
+# da dieser Teil bei der DNS-Anfrage nicht übermittelt wird
 facebook
 # instagram
